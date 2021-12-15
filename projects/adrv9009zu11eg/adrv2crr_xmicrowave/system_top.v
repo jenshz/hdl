@@ -331,22 +331,7 @@ module system_top (
   assign gpio_2_exp_p = spi_3_to_8_csn[6];
 
   assign spi1_cs0 = spi1_csn[0];
-  assign spi1_cs1 = spi1_csn[1];
-  assign spi1_cs2 = spi1_csn[2];
-  assign spi1_cs3 = spi1_csn[3];
-  assign spi1_cs4 = spi1_csn[4];
-  assign spi1_cs5 = spi1_csn[5];
-  assign spi1_cs6 = spi1_csn[6];
-  assign spi1_cs7 = spi1_csn[7];
- 
   assign spi2_cs0 = spi2_csn[0];
-  assign spi2_cs1 = spi2_csn[1];
-  assign spi2_cs2 = spi2_csn[2];
-  assign spi2_cs3 = spi2_csn[3];
-  assign spi2_cs4 = spi2_csn[4];
-  assign spi2_cs5 = spi2_csn[5];
-  assign spi2_cs6 = spi2_csn[6];
-  assign spi2_cs7 = spi2_csn[7];
   
   adrv9009zu11eg_spi i_spi (
   .spi_csn(spi_3_to_8_csn),
@@ -362,13 +347,27 @@ module system_top (
   assign gpio_i[31:28] = gpio_o[31:28];
   assign gpio_i[21:20] = gpio_o[21:20];
   
-  assign xmicrowave_gpio_i[63:16] = xmicrowave_gpio_o[63:16];
+  assign xmicrowave_gpio_i[63:30] = xmicrowave_gpio_o[63:30];
 
-  ad_iobuf #(.DATA_WIDTH(16)) i_xmicrowave_iobuf (
-    .dio_t ({xmicrowave_gpio_t[15:0]}),
-    .dio_i ({xmicrowave_gpio_o[15:0]}),
-    .dio_o ({xmicrowave_gpio_i[15:0]}),
+  ad_iobuf #(.DATA_WIDTH(30)) i_xmicrowave_iobuf (
+    .dio_t ({xmicrowave_gpio_t[29:0]}),
+    .dio_i ({xmicrowave_gpio_o[29:0]}),
+    .dio_o ({xmicrowave_gpio_i[29:0]}),
     .dio_p ({
+              spi1_cs7,    // 29
+              spi1_cs6,    // 28
+              spi1_cs5,    // 27
+              spi1_cs4,    // 26
+              spi1_cs3,    // 25
+              spi1_cs2,    // 24
+              spi1_cs1,    // 23
+              spi0_cs7,    // 22
+              spi0_cs6,    // 21
+              spi0_cs5,    // 20
+              spi0_cs4,    // 19
+              spi0_cs3,    // 18
+              spi0_cs2,    // 17
+              spi0_cs1,    // 16
               dir_gpio7,   // 15
               dir_gpio6,   // 14
               dir_gpio5,   // 13

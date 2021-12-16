@@ -1,11 +1,22 @@
+#
+# Parameter description:
+#   JESD_MODE : Used link layer encoder mode
+#      64B66B - 64b66b link layer defined in JESD 204C
+#      8B10B  - 8b10b link layer defined in JESD 204B
+#
+#   RX_JESD_M : Number of converters per link
+#   RX_JESD_L : Number of lanes per link
+#   RX_JESD_S : Number of samples per frame
+#   RX_JESD_NP : Number of bits per sample
+#
 
 # RX parameters for each converter
-set RX_NUM_OF_LANES 4      ; # L
-set RX_NUM_OF_CONVERTERS 4 ; # M
-set RX_SAMPLES_PER_FRAME 1 ; # S
-set RX_SAMPLE_WIDTH 16     ; # N/NP
+set RX_NUM_OF_LANES $ad_project_params(RX_JESD_L)      ; # L
+set RX_NUM_OF_CONVERTERS $ad_project_params(RX_JESD_M) ; # M
+set RX_SAMPLES_PER_FRAME $ad_project_params(RX_JESD_S) ; # S
+set RX_SAMPLE_WIDTH $ad_project_params(RX_JESD_NP)     ; # N/NP
 
-set RX_SAMPLES_PER_CHANNEL 2 ; # L * 32 / (M * N)
+set RX_SAMPLES_PER_CHANNEL [expr ($RX_NUM_OF_LANES*32) / ($RX_NUM_OF_CONVERTERS*$RX_SAMPLE_WIDTH)] ; # L * 32 / (M * N)
 
 source $ad_hdl_dir/library/jesd204/scripts/jesd204.tcl
 
@@ -129,3 +140,8 @@ ad_connect  $sys_dma_resetn axi_ad9250_dma/m_dest_axi_aresetn
 ad_cpu_interrupt ps-11 mb-14 axi_ad9250_jesd/irq
 ad_cpu_interrupt ps-13 mb-13 axi_ad9250_dma/irq
 
+# Create dummy outputs for unused Rx lanes
+for {set i $RX_NUM_OF_LANES} {$i < 4} {incr i} {
+    create_bd_port -dir I rx_data_${i}_n
+    create_bd_port -dir I rx_data_${i}_p
+}

@@ -354,28 +354,28 @@ module system_top (
     .dio_i ({xmicrowave_gpio_o[29:0]}),
     .dio_o ({xmicrowave_gpio_i[29:0]}),
     .dio_p ({
-              spi1_cs7,    // 29
-              spi1_cs6,    // 28
-              spi1_cs5,    // 27
-              spi1_cs4,    // 26
-              spi1_cs3,    // 25
-              spi1_cs2,    // 24
-              spi1_cs1,    // 23
-              spi0_cs7,    // 22
-              spi0_cs6,    // 21
-              spi0_cs5,    // 20
-              spi0_cs4,    // 19
-              spi0_cs3,    // 18
-              spi0_cs2,    // 17
-              spi0_cs1,    // 16
-              dir_gpio7,   // 15
-              dir_gpio6,   // 14
-              dir_gpio5,   // 13
-              dir_gpio4,   // 12
-              dir_gpio3,   // 11
-              dir_gpio2,   // 10
-              dir_gpio1,   // 09
-              dir_gpio0,   // 08
+              dir_gpio7,   // 29
+              dir_gpio6,   // 28
+              dir_gpio5,   // 27
+              dir_gpio4,   // 26
+              dir_gpio3,   // 25
+              dir_gpio2,   // 24
+              dir_gpio1,   // 23
+              dir_gpio0,   // 22
+              spi1_cs7,    // 21
+              spi1_cs6,    // 20
+              spi1_cs5,    // 19
+              spi1_cs4,    // 18
+              spi1_cs3,    // 17
+              spi1_cs2,    // 16
+              spi1_cs1,    // 15
+              spi0_cs7,    // 14
+              spi0_cs6,    // 13
+              spi0_cs5,    // 12
+              spi0_cs4,    // 11
+              spi0_cs3,    // 10
+              spi0_cs2,    // 09
+              spi0_cs1,    // 08
               gpio7,       // 07
               gpio6,       // 06
               gpio5,       // 05
